@@ -1,15 +1,15 @@
-import { BrowserRouter } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <div className="flex flex-col min-h-screen">
       <Header />
       <main className="container py-3 mx-auto flex-grow">
-        <h1>Hello</h1>
+        <Outlet />
       </main>
-      <Footer></Footer>
-    </BrowserRouter>
+      <Footer />
+    </div>
   );
 }
