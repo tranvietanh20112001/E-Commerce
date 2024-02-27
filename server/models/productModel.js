@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const reviewSchema = mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -10,7 +11,7 @@ const reviewSchema = mongoose.Schema({
     required: true,
   },
   rating: {
-    type: String,
+    type: Number,
     required: true,
   },
   comment: {
@@ -18,6 +19,7 @@ const reviewSchema = mongoose.Schema({
     required: true,
   },
 });
+
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -45,13 +47,13 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    review: [reviewSchema],
+    reviews: [reviewSchema],
     rating: {
       type: Number,
       required: true,
       default: 0,
     },
-    numberReviews: {
+    numReviews: {
       type: Number,
       required: true,
       default: 0,
@@ -72,6 +74,6 @@ const productSchema = mongoose.Schema(
   }
 );
 
-const Products = mongoose.Model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema);
 
-export default Products;
+export default Product;

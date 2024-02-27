@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import { products } from "../client/src/data/products.js";
 import cors from "cors";
 import connectDB from "./config/db.js";
-
+import Product from "./models/productModel.js";
+import productRoutes from "./routes/productRoutes.js";
 dotenv.config();
 connectDB();
 
@@ -16,14 +17,7 @@ app.get("/", (req, res) => {
   res.send("app is running");
 });
 
-app.get("/api/products", (req, res) => {
-  res.json(products);
-});
-
-app.get("/api/products/:id", (req, res) => {
-  const product = products.find((p) => p.id == req.params.id);
-  res.json(product);
-});
+app.use("/api/products", productRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is running at port ${PORT}`);
