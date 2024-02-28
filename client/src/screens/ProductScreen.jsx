@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productApiSlice";
+import Spinner from "../components/Spinner";
+import { toast } from "react-toastify";
 
 export default function ProductScreen() {
   const { id: productId } = useParams();
@@ -17,9 +19,9 @@ export default function ProductScreen() {
         </button>
       </Link>
       {isLoading ? (
-        <h1>Loading...</h1>
+        <Spinner />
       ) : error ? (
-        <div>error?.data?.message || error?.error</div>
+        toast.error(error?.data?.message || error?.error)
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="md:col-span-1">
