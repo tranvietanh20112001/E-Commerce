@@ -3,7 +3,9 @@ import Header from "./HomeComponents/Header";
 // import ProductList from "./HomeComponents/ProductList";
 import AppBar from "./HomeComponents/AppBar";
 import { Divider } from "@mui/material";
-import TodayProductSlider from "./HomeComponents/TodayProductSlider";
+import TodayProductSlider from "./HomeComponents/today/TodayProductSlider";
+import Categories from "./HomeComponents/Categories/Categories";
+import Footer from "./HomeComponents/Footer";
 
 const Home = () => {
   return (
@@ -22,8 +24,10 @@ const Home = () => {
         <AppBar />
         <Divider sx={{ width: "100%", height: "2px" }} />
         <TodayProductSlider />
-        {/* <ProductList /> */}
+        <Divider sx={{ width: "100%", height: "2px" }} />
+        <Categories />
       </Box>
+      <Footer />
     </>
   );
 };

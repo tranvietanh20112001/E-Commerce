@@ -1,7 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import TimeCount from "./TimeCount";
-import ProductList from "./ProductList";
+import ProductList from "../ProductList";
+import NextPrevButtons from "../../../Buttons/NextPrevButtons";
+import { useState } from "react";
 const TodayProductSlider = () => {
+  const [skip, setSkip] = useState(0);
+  const limit = 4;
+
+  const showMoreProducts = () => {
+    setSkip(skip + limit);
+  };
+
+  const showPreviousProducts = () => {
+    setSkip(Math.max(skip - limit, 0));
+  };
+
   return (
     <Box sx={{ width: "100%" }}>
       <Box
@@ -24,9 +37,24 @@ const TodayProductSlider = () => {
           Today's Deals
         </Typography>
       </Box>
-      <Box sx={{ marginTop: "20px", display: "flex", alignItems: "center" }}>
-        <Typography variant="h5">Flash Sale</Typography>
-        <TimeCount />
+      <Box
+        sx={{
+          marginTop: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <Typography variant="h5">Flash Sale</Typography>
+          <TimeCount />
+        </Box>
+
+        <NextPrevButtons
+          onNext={showMoreProducts}
+          onPrevious={showPreviousProducts}
+        />
       </Box>
 
       <Box
@@ -37,7 +65,7 @@ const TodayProductSlider = () => {
           marginTop: "20px",
         }}
       >
-        <ProductList />
+        <ProductList skip={skip} limit={limit} />
       </Box>
     </Box>
   );
