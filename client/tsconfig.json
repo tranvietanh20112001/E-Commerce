@@ -21,13 +21,20 @@
     "noFallthroughCasesInSwitch": true,
 
     /* Path */
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@components/*": ["components/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@utils/*": ["utils/*"],
-      "@stores/*": ["stores/*"]
+      "@assets/*": ["./src/assets/*"],
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@service/*": ["./src/service/*"],
+      "@stores/*": ["./src/stores/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["**/node_modules/**"]
 }

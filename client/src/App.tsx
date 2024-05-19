@@ -1,13 +1,10 @@
-import NotificationProvider from "./providers/NotificationProvider";
-import AppProvider from "./providers/AppProvider";
-import AppRoutes from "./routes/AppRoutes";
+import AppProvider from "./providers/app.provider";
+import AppRoutes from "./routes/app.route";
 import "./index.css";
 function App() {
   return (
     <AppProvider>
-      <NotificationProvider>
-        <AppRoutes />
-      </NotificationProvider>
+      <AppRoutes />
     </AppProvider>
   );
 }
