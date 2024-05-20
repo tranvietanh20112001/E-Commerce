@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { fetchProducts, deleteProduct } from "../apis/product.api";
-import { IProduct, IDeleteProductPayload } from "@interfaces/product.interface";
+import {
+  fetchProducts,
+  deleteProduct,
+  createProduct,
+} from "../apis/product.api";
+import {
+  IProduct,
+  IDeleteProductPayload,
+  ICreateProductPayload,
+} from "@interfaces/product.interface";
 
 interface ProductsState {
   items: IProduct[];
@@ -14,10 +22,20 @@ const initialState: ProductsState = {
   error: null,
 };
 
+// Get All Products ------------------------------------------
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
     const response = await fetchProducts();
+    return response;
+  }
+);
+
+// Create Product ------------------------------------------
+export const addProduct = createAsyncThunk(
+  "products/addProduct",
+  async (productData: ICreateProductPayload) => {
+    const response = await createProduct(productData);
     return response;
   }
 );
@@ -52,6 +70,9 @@ const productsSlice = createSlice({
         state.items = state.items.filter(
           (item: { _id: any }) => item._id !== action.payload._id
         );
+      })
+      .addCase(addProduct.fulfilled, (state, action) => {
+        state.items.push(action.payload);
       });
   },
 });

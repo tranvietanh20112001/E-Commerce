@@ -5,7 +5,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EyeIcon from "@mui/icons-material/Visibility";
 
 import { IProduct } from "@interfaces/product.interface";
-import DeleteProductModal from "./DeleteProductModal";
+import DeleteProductModal from "./Modal/DeleteProductModal";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@stores/index.store";
 import React from "react";

@@ -18,18 +18,15 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8000/api/product/new
+POST http://localhost:8000/api/product/
 Content-Type: application/json
 
 {
-  "name": "do choi 3",
-  "description": "do choi 3 ne",
+  "name": "do choi 12",
+  "description": "do choi 12 ne",
   "price": 150,
   "imageURL": "..."
 }
 
 ###
-GET http://localhost:8000/api/product/GetAllProducts
-
-###
-GET  http://localhost:8000/api/product/6648bbc2b647ba693d8c882e
+GET http://localhost:8000/api/product

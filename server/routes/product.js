@@ -8,7 +8,7 @@ const path = require("path");
 // @route GET api/products
 // @desc Get all products
 // @access Public
-router.get("/GetAllProducts", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
@@ -32,10 +32,10 @@ const upload = multer({ storage: storage });
 // @route POST api/products
 // @desc Create a product
 // @access Private
-router.post("/new", async (req, res) => {
-  const { name, description, price } = req.body;
-
+router.post("/", async (req, res) => {
   try {
+    const { name, description, price } = req.body;
+
     const newProduct = new Product({
       name,
       description,
