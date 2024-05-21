@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../stores/index.store";
 import { Field, Form, Formik } from "formik";
 import { ICreateProductPayload } from "@interfaces/product.interface";
-import { addProduct } from "src/reducers/product.reducer";
+import { addProduct } from "../../../../stores/product.store";
 
 const style = {
   position: "absolute" as const,

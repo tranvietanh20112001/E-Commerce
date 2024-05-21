@@ -46,7 +46,7 @@ axiosInstance.interceptors.response.use(
       error?.message ||
       "Something went wrong!";
     if (error.response.status === 500) {
-      message = "Something went wrong on our end, please contact Long!";
+      message = "Something went wrong on our end";
     }
     return Promise.reject(message);
   }

@@ -4,6 +4,7 @@ import Contact from "../pages/home/contact/Contact";
 import { About } from "../pages/home/about/About";
 import { Login } from "../pages/home/login/Login";
 import { Register } from "../pages/home/login/Register";
+
 export const HomeRoutes: IRoute[] = [
   {
     path: "/",

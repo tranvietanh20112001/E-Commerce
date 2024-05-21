@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../../stores/index.store";
-import { getProducts } from "../../../reducers/product.reducer";
+import { getProducts } from "../../../stores/product.store";
 import {
   Box,
   Table,

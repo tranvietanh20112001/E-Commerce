@@ -9,7 +9,7 @@ import DeleteProductModal from "./Modal/DeleteProductModal";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@stores/index.store";
 import React from "react";
-import { deleteProductById } from "src/reducers/product.reducer";
+import { deleteProductById } from "../../../stores/product.store";
 
 export interface IProductRowProps {
   product: IProduct;
