@@ -14,12 +14,8 @@ const contentStyle: React.CSSProperties = {
 };
 
 const App: React.FC = () => {
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
-
   return (
-    <Carousel afterChange={onChange} autoplay>
+    <Carousel autoplay>
       <Box width={"100%"}>
         <Image src={banner1} style={contentStyle} preview={false} />
       </Box>
