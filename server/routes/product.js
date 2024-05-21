@@ -4,35 +4,33 @@ const verifyToken = require("../middleware/auth");
 const Product = require("../models/Product");
 const multer = require("multer");
 const path = require("path");
-
 // @route GET api/products
 // @desc Get all products
 // @access Public
 router.get("/", async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().sort({ createdAt: -1 });
     res.json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Set up Multer for file uploads
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
+  destination: (req, file, cb) => {
+    cb(null, "../uploads");
   },
-  filename: function (req, file, cb) {
+  filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 // @route POST api/products
 // @desc Create a product
 // @access Private
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
     const { name, description, price } = req.body;
 
@@ -40,6 +38,7 @@ router.post("/", async (req, res) => {
       name,
       description,
       price,
+      image: req.file,
     });
 
     await newProduct.save();
@@ -52,17 +51,6 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server error" });
-  }
-});
-
-// POST /api/products/upload-image - Upload an image for a product
-router.post("/upload-image", upload.single("image"), async (req, res) => {
-  try {
-    const imageUrl = req.file.path; // Get the path of the uploaded image
-    res.status(200).json({ imageUrl });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server Error" });
   }
 });
 

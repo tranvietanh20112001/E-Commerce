@@ -4,6 +4,7 @@ import {
   ICreateProductPayload,
   IProduct,
 } from "../interfaces/product.interface";
+import { axiosInstance } from "src/lib/axios.lib";
 import { objectToFormData } from "src/utils/data.util";
 export const fetchProducts = async () => {
   const response = await axios.get(`${API_URL}/product/`);
@@ -13,17 +14,15 @@ export const fetchProducts = async () => {
 export const createProduct = async (
   productData: ICreateProductPayload
 ): Promise<IProduct> => {
-  const response = await axios.post<ICreateProductPayload>(
+  const response = await axiosInstance.post(
     `${API_URL}/product/`,
-    productData,
+    objectToFormData({ ...productData }),
     {
       headers: {
         "Content-Type": "application/json",
       },
     }
   );
-
-  console.log(productData);
 
   return response.data;
 };

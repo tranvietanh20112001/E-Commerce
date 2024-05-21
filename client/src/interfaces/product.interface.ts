@@ -3,14 +3,19 @@ export interface IProduct {
   name: string;
   price: number;
   description: string;
-  image?: string;
+  image_URL?: string;
+}
+export interface ProductsState {
+  items: IProduct[];
+  status: "idle" | "loading" | "succeeded" | "failed";
+  error: string | null;
 }
 
 export interface ICreateProductPayload {
-  _id: string;
   name: string;
   price: number;
   description: string;
+  image?: File;
 }
 
 export interface IDeleteProductPayload {

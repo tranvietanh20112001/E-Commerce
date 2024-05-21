@@ -5,11 +5,10 @@ import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { useState } from "react";
 import { Textarea } from "@mui/joy";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../../../../stores/index.store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../../../stores/index.store";
 import { Field, Form, Formik } from "formik";
-// import { createProduct } from "../../../../reducers/product.reducer";
-import { ICreateProductPayload, IProduct } from "@interfaces/product.interface";
+import { ICreateProductPayload } from "@interfaces/product.interface";
 import { addProduct } from "src/reducers/product.reducer";
 
 const style = {
@@ -35,24 +34,22 @@ export default function ProductModal({
 }) {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [bannerImage, setBannerImage] = useState<File>();
+  const [image, setImageProduct] = useState<File>();
 
-  const onSelectBannerImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
-    const file = e.target.files[0];
-    setBannerImage(file);
+    const image = e.target.files[0];
+    setImageProduct(image);
   };
 
-  const initialValues: ICreateProductPayload = {
-    _id: "",
+  const initialValues: Partial<ICreateProductPayload> = {
     name: "",
     price: 0,
     description: "",
   };
 
-  const handleSubmit = (values: ICreateProductPayload) => {
-    console.log(values);
-    dispatch(addProduct(values))
+  const handleSubmit = (values: Partial<ICreateProductPayload>) => {
+    dispatch(addProduct({ ...values, image } as ICreateProductPayload))
       .unwrap()
       .then(() => handleClose());
   };
@@ -129,9 +126,9 @@ export default function ProductModal({
                   type="file"
                   accept="image/*"
                   hidden
-                  onChange={onSelectBannerImage}
+                  onChange={handleFileChange}
                 />
-                {bannerImage ? bannerImage.name : "Select Banner Image"}
+                {image ? image.name : "Select Banner Image"}
               </Button>
             </Box>
             <Button

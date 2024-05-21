@@ -5,16 +5,10 @@ import {
   createProduct,
 } from "../apis/product.api";
 import {
-  IProduct,
   IDeleteProductPayload,
   ICreateProductPayload,
+  ProductsState,
 } from "@interfaces/product.interface";
-
-interface ProductsState {
-  items: IProduct[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
-}
 
 const initialState: ProductsState = {
   items: [],

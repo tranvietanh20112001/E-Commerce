@@ -1,11 +1,16 @@
 import { Route, Routes } from "react-router";
-import ProductList from "../pages/admin/Products/ProductList";
 import { AdminRoutes } from "./admin.route";
 import AdminLayout from "../pages/admin/AdminLayout";
+import HomeLayout from "../pages/home/HomeLayout";
+import { HomeRoutes } from "./home.route";
 export default function AppRoutes(): JSX.Element {
   return (
     <Routes>
-      <Route path="/" element={<ProductList />} />
+      <Route element={<HomeLayout />}>
+        {HomeRoutes.map(({ path, component }) => (
+          <Route key={path} path={path} element={component} />
+        ))}
+      </Route>
       <Route element={<AdminLayout />}>
         {AdminRoutes.map(({ path, component }) => (
           <Route key={path} path={path} element={component} />
