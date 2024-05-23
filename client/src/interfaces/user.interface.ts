@@ -28,7 +28,8 @@ export interface IUser {
 
 export interface IUserState {
   user: IUser | null;
-  users: IUser[];
+  loading: boolean;
+  error: string | null;
 }
 
 export interface IFindUsersPayload {

@@ -7,7 +7,8 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../stores/index.store";
 import { ILoginPayload } from "@interfaces/user.interface";
 import { Field, Form, Formik } from "formik";
-import userState from "../../../stores/user.store";
+import { login } from "../../../stores/user.store";
+import { useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -17,9 +18,13 @@ const initialValues: ILoginPayload = {
 };
 
 export const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const onSubmit = (values: ILoginPayload) => {
-    dispatch(userState.login(values));
+    console.log(values);
+    dispatch(login(values)).then(() => {
+      navigate("/");
+    });
   };
   return (
     <Box width={"100%"} display={"flex"}>

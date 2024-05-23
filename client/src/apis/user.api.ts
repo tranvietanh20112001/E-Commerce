@@ -1,14 +1,16 @@
 import { ILoginPayload, IUser } from "@interfaces/user.interface";
 import { axiosInstance } from "../lib/axios.lib";
+import { API_URL } from "../config/config";
+import axios from "axios";
 
-const login = async (payload: ILoginPayload): Promise<IUser> => {
-  return await axiosInstance.post("/auth/login", payload, {
-    headers: { "X-Required-Auth": false },
-  });
+export const login = async (payload: ILoginPayload) => {
+  return axios.post(`${API_URL}/auth/login`, payload);
 };
 
-const loadUser = async (): Promise<IUser> => {
-  return await axiosInstance.get("/auth");
+const loadUser = async (token: string) => {
+  return axios.get(`${API_URL}/auth/user`, {
+    headers: { Authorization: token },
+  });
 };
 
 const register = async (payload: IUser): Promise<IUser> => {

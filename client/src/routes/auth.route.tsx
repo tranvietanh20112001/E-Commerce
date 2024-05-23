@@ -1,5 +1,5 @@
 import { IRoute } from "../interfaces/route.interface";
-import { Login } from "../pages/home/login/Login";
+import { Login } from "../pages/auth/login/Login";
 
 export const AuthRoutes: IRoute[] = [
   {

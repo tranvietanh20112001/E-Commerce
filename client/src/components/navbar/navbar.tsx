@@ -3,39 +3,28 @@ import { Box, InputAdornment, TextField, styled } from "@mui/material";
 import { Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AccountIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
-import type { MenuProps } from "antd";
-import { Dropdown } from "antd";
-
+import { Link, useNavigate } from "react-router-dom";
+import { getCurrentUser } from "../../stores/user.store";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../stores/index.store";
+import { useEffect } from "react";
+import Dropdown from "./dropdownButton/dropdownButton";
 const Title = styled(Typography)({
   margin: 0,
   fontWeight: "bold",
 });
 
-const items: MenuProps["items"] = [
-  {
-    label: "Manage Account",
-    key: "0",
-  },
-  {
-    label: "My Wishlist",
-    key: "1",
-  },
-  {
-    label: <a href="/login">Login</a>,
-    key: "2",
-  },
-  {
-    type: "divider",
-  },
-  {
-    label: "Logout",
-    key: "3",
-  },
-];
-
 export const Navbar = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(getCurrentUser(token));
+    }
+  }, [dispatch, navigate]);
+
   return (
     <Box
       width={"100%"}
@@ -86,12 +75,7 @@ export const Navbar = () => {
         />
 
         <CartIcon fontSize="large" />
-
-        <Dropdown menu={{ items }} trigger={["click"]}>
-          <a onClick={(e) => e.preventDefault()}>
-            <AccountIcon fontSize="large" />
-          </a>
-        </Dropdown>
+        <Dropdown />
       </Box>
     </Box>
   );
