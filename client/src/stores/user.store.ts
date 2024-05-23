@@ -6,9 +6,8 @@ export const name = "userState";
 const initialState: IUserState = {
   user: null,
   users: [],
-  loginSessions: [],
-  filter: {},
 };
+
 // Login --------------------------------------------------------
 export const login = createAsyncThunk(
   `${name}/login`,
@@ -16,7 +15,16 @@ export const login = createAsyncThunk(
     return await userService.login(payload);
   }
 );
-const userState = createSlice({
+
+// Get current user ---------------------------------------------
+export const getCurrentUser = createAsyncThunk(
+  `${name}/getCurrentUser`,
+  async () => {
+    return await userService.loadUser();
+  }
+);
+
+export const userState = createSlice({
   name,
   initialState,
   reducers: {},
@@ -26,7 +34,12 @@ const userState = createSlice({
     builder.addCase(login.fulfilled, (state, action) => {
       state.user = action.payload;
     });
+
+    // Get current user ---------------------------------------------
+    builder.addCase(getCurrentUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+    });
   },
 });
 
-export default userState;
+export default userState.reducer;

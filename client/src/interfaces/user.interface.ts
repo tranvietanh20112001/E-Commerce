@@ -24,20 +24,11 @@ export enum EGender {
 export interface IUser {
   _id: string;
   username: string;
-  name: string;
-  avatar_url?: string;
-  phone?: string;
-  dob?: string;
-  gender: EGender;
-  role: ERole;
-  disabled: boolean;
 }
 
 export interface IUserState {
   user: IUser | null;
   users: IUser[];
-  loginSessions: ILoginSession[];
-  filter: IFindUsersPayload;
 }
 
 export interface IFindUsersPayload {

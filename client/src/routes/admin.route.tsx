@@ -6,9 +6,9 @@ export const AdminRoutes: IRoute[] = [
   {
     path: "admin/products",
     component: (
-      // <AuthorizedPage allowedRoles={[ERole.Admin]}>
-      <ProductList />
-      // </AuthorizedPage>
+      <AuthorizedPage allowedRoles={[ERole.Admin]}>
+        <ProductList />
+      </AuthorizedPage>
     ),
   },
 ];

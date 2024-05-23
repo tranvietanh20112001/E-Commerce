@@ -19,7 +19,6 @@ const initialValues: ILoginPayload = {
 export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const onSubmit = (values: ILoginPayload) => {
-    console.log("Form data", values);
     dispatch(userState.login(values));
   };
   return (

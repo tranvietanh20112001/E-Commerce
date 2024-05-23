@@ -4,7 +4,7 @@ import productsReducer from "./product.store";
 import userState from "./user.store";
 export const store = configureStore({
   reducer: {
-    users: userState.reducer,
+    userState: userState,
     products: productsReducer,
   },
 });
