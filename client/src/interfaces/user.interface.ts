@@ -4,17 +4,6 @@ export interface ILoginPayload {
   password: string;
 }
 
-export interface ILoginSession {
-  _id: string;
-  browser: string;
-  date: string;
-  isCurrentDevice: boolean;
-}
-
-export enum ERole {
-  Customer = "customer",
-  Admin = "admin",
-}
 export enum EGender {
   Male = "male",
   Female = "female",
@@ -24,6 +13,19 @@ export enum EGender {
 export interface IUser {
   _id: string;
   username: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  address: {
+    city: string;
+    district: string;
+    ward: string;
+    street: string;
+  };
+  created_at: Date;
+  updated_at: Date;
+  is_active: boolean;
+  is_admin: boolean;
 }
 
 export interface IUserState {
@@ -34,8 +36,11 @@ export interface IUserState {
 
 export interface IFindUsersPayload {
   name?: string;
-  role?: ERole | "";
   username?: string;
+  gender?: EGender;
+  is_active?: boolean;
+  sort?: string;
+  order?: string;
   skip?: number;
   limit?: number;
 }

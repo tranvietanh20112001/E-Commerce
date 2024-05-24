@@ -6,6 +6,8 @@ const authenticateToken = require("../middleware/auth");
 
 const router = express.Router();
 
+// Register a new user
+
 router.post("/register", async (req, res) => {
   const { username, password } = req.body;
   const hashedPassword = await bcryptjs.hash(password, 10);
@@ -13,9 +15,11 @@ router.post("/register", async (req, res) => {
 
   try {
     await user.save();
-    res.status(201).send("User registered");
+    res.status(200).send("User registered");
+    console.log("User registered");
   } catch (err) {
     res.status(400).send("Error registering user");
+    console.log("Error registering user");
   }
 });
 
@@ -31,8 +35,9 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
+// Get user details
 router.get("/user", authenticateToken, async (req, res) => {
-  const user = await User.findById(req.user.userId).select("-password");
+  const user = await User.findById(req.user.userId).select("-password_hash");
   res.json(user);
 });
 

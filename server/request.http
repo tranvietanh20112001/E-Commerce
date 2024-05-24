@@ -2,8 +2,8 @@ POST http://localhost:8000/api/auth/register
 Content-Type: application/json
 
 {
-  "username": "vietanh911",
-  "password": "2011"
+  "username": "guest",
+  "password": "guest"
 }
 
 ###
@@ -12,8 +12,8 @@ POST http://localhost:8000/api/auth/login
 Content-Type: application/json
 
 {
-  "username": "vietanh911",
-  "password": "2011"
+  "username": "admin",
+  "password": "admin"
 }
 
 ###

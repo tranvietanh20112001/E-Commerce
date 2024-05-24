@@ -1,23 +1,23 @@
+// models/Product.js
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-const ProductSchema = new Schema(
-  {
-    name: {
-      type: String,
-      // required: true,
-    },
-    description: {
-      type: String,
-      // required: true,
-    },
-    price: {
-      type: Number,
-      // required: true,
-    },
-    image: { type: String, required: false },
-  },
-  { timestamps: true }
-);
+const ProductSchema = new Schema({
+  name: { type: String, required: true },
+  description: String,
+  price: { type: Number, required: true },
+  category: String,
+  stock_quantity: { type: Number, default: 0 },
+  images: [String],
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now },
+});
 
-module.exports = mongoose.model("products", ProductSchema);
+ProductSchema.pre("save", function (next) {
+  this.updated_at = Date.now();
+  next();
+});
+
+const Product = mongoose.model("Product", ProductSchema);
+
+module.exports = Product;

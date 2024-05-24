@@ -6,18 +6,34 @@ import { Navbar } from "../../components/navbar/navbar";
 import { Divider } from "antd";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores/index.store";
+import { Image } from "antd";
+import banner5 from "@assets/banner5.jpg";
 const AuthLayout = () => {
   const [searchParams] = useSearchParams();
   const { user } = useSelector((state: RootState) => state.users);
+  console.log("hjgh", banner5);
   return (
     <>
       <Header />
+      <img src={banner5} />
       <Box width={"100%"} display={"flex"} justifyContent={"center"}>
         <Box width={"90%"}>
           <Navbar />
           <Divider />
+          <img src={banner5} />
           {user && <Navigate to={searchParams.get("redirect") || "/home"} />}
-          <Outlet />
+          <Box width={"100%"} display={"flex"}>
+            <Box width={"50%"}>
+              <Image
+                src={banner5}
+                style={{ width: "100%", height: "100%" }}
+                preview={false}
+              />
+            </Box>
+            <Box width={"50%"} height={"100%"}>
+              <Outlet />
+            </Box>
+          </Box>
         </Box>
       </Box>
       <Footer />
