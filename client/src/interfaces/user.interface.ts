@@ -44,3 +44,13 @@ export interface IFindUsersPayload {
   skip?: number;
   limit?: number;
 }
+
+export interface IRegisterPayload {
+  username: string;
+  password: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
+  is_admin: false;
+  gender: EGender;
+}

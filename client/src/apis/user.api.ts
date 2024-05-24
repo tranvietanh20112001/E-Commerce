@@ -1,6 +1,6 @@
-import { ILoginPayload, IUser } from "@interfaces/user.interface";
-import { axiosInstance } from "../lib/axios.lib";
-import { API_URL } from "../config/config";
+import { ILoginPayload, IRegisterPayload } from "@interfaces/user.interface";
+import { axiosInstance } from "@lib/axios.lib";
+import { API_URL } from "@config/config";
 import axios from "axios";
 
 export const login = async (payload: ILoginPayload) => {
@@ -13,11 +13,10 @@ const loadUser = async (token: string) => {
   });
 };
 
-const register = async (payload: IUser): Promise<IUser> => {
+const register = async (payload: IRegisterPayload) => {
   return await axiosInstance.post("/auth/register", payload, {
     headers: { "X-Required-Auth": false },
   });
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default { login, register, loadUser };

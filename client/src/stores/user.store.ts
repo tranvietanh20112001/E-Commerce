@@ -1,4 +1,8 @@
-import { ILoginPayload, IUserState } from "../interfaces/user.interface";
+import {
+  ILoginPayload,
+  IRegisterPayload,
+  IUserState,
+} from "../interfaces/user.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "../apis/user.api";
 
@@ -15,6 +19,15 @@ export const login = createAsyncThunk(
   async (payload: ILoginPayload) => {
     const response = await userService.login(payload);
     localStorage.setItem("token", response.data.token);
+    return response.data;
+  }
+);
+
+// Register -----------------------------------------------------
+export const register = createAsyncThunk(
+  `${name}/register`,
+  async (payload: IRegisterPayload) => {
+    const response = await userService.register(payload);
     return response.data;
   }
 );
@@ -60,6 +73,17 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+      })
+      .addCase(register.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(register.fulfilled, (state) => {
+        state.loading = false;
+        state.error = null;
+      })
+      .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;
       });

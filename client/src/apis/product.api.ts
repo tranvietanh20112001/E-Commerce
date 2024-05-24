@@ -1,11 +1,8 @@
 import axios from "axios";
-import { API_URL } from "../config/config";
-import {
-  ICreateProductPayload,
-  IProduct,
-} from "../interfaces/product.interface";
-import { axiosInstance } from "../lib/axios.lib";
-import { objectToFormData } from "../utils/data.util";
+import { API_URL } from "@config/config";
+import { ICreateProductPayload, IProduct } from "@interfaces/product.interface";
+import { axiosInstance } from "@lib/axios.lib";
+import { objectToFormData } from "@utils/data.util";
 export const fetchProducts = async () => {
   const response = await axios.get(`${API_URL}/product/`);
   return response.data;

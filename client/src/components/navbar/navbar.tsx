@@ -1,12 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Box, InputAdornment, TextField, styled } from "@mui/material";
 import { Typography } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Link, useNavigate } from "react-router-dom";
-import { getCurrentUser } from "../../stores/user.store";
+import { getCurrentUser } from "@stores/user.store";
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../../stores/index.store";
+import { AppDispatch } from "@stores/index.store";
 import { useEffect } from "react";
 import Dropdown from "./dropdownButton/dropdownButton";
 const Title = styled(Typography)({

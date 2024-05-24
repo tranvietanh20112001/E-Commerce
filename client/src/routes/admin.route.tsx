@@ -1,9 +1,13 @@
-import { IRoute } from "../interfaces/route.interface";
-import ProductList from "../pages/admin/Products/ProductList";
-// import AuthorizedPage from "../components/AuthorizedPage/AuthorizedPage";
+import { IRoute } from "@interfaces/route.interface";
+import ProductList from "@pages/admin/Products/ProductList";
+import AuthorizedPage from "@components/AuthorizedPage/AuthorizedPage";
 export const AdminRoutes: IRoute[] = [
   {
     path: "admin/products",
-    component: <ProductList />,
+    component: (
+      <AuthorizedPage>
+        <ProductList />,
+      </AuthorizedPage>
+    ),
   },
 ];

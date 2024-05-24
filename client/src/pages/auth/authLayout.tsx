@@ -11,16 +11,13 @@ import banner5 from "@assets/banner5.jpg";
 const AuthLayout = () => {
   const [searchParams] = useSearchParams();
   const { user } = useSelector((state: RootState) => state.users);
-  console.log("hjgh", banner5);
   return (
     <>
       <Header />
-      <img src={banner5} />
       <Box width={"100%"} display={"flex"} justifyContent={"center"}>
         <Box width={"90%"}>
           <Navbar />
           <Divider />
-          <img src={banner5} />
           {user && <Navigate to={searchParams.get("redirect") || "/home"} />}
           <Box width={"100%"} display={"flex"}>
             <Box width={"50%"}>
@@ -30,7 +27,13 @@ const AuthLayout = () => {
                 preview={false}
               />
             </Box>
-            <Box width={"50%"} height={"100%"}>
+            <Box
+              width={"50%"}
+              height={"648px"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
               <Outlet />
             </Box>
           </Box>

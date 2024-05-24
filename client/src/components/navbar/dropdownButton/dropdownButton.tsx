@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import AccountIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useSelector } from "react-redux";
-import { RootState } from "../../../stores/index.store";
+import { RootState } from "@stores/index.store";
 import { useNavigate } from "react-router-dom";
 export default function Dropdown() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

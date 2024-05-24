@@ -16,10 +16,10 @@ export default function AuthorizedPage({ children }: IAuthorizedPageProps) {
 
   if (!user) return <Navigate to={"/login" + "?redirect=" + pathname} />;
 
-  // if (!allowedRoles || allowedRoles.includes(user!.role)) {
-  return <>{children}</>;
-  // }
-
-  notifyError("You are not authorized to access this page!");
-  return <Navigate to="/" />;
+  if (user.is_admin) {
+    return <>{children}</>;
+  } else {
+    notifyError("You are not authorized to access this page!");
+    return <Navigate to="/" />;
+  }
 }
