@@ -3,7 +3,13 @@ export interface IProduct {
   name: string;
   price: number;
   description: string;
-  image_URL?: string;
+  imageURL?: string;
+  created_at: Date;
+  updated_at: Date;
+  category: string;
+  stock_quantity: number;
+  sold: number;
+  rating: number;
 }
 export interface ProductsState {
   items: IProduct[];

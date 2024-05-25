@@ -32,13 +32,16 @@ const upload = multer({ storage });
 // @access Private
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const { name, description, price } = req.body;
+    const { name, description, price, imageURL, stock_quantity, category } =
+      req.body;
 
     const newProduct = new Product({
       name,
       description,
       price,
-      image: req.file,
+      imageURL,
+      stock_quantity,
+      category,
     });
 
     await newProduct.save();

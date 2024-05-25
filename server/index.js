@@ -5,7 +5,7 @@ require("dotenv").config();
 const cors = require("cors");
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
-
+const imageRouter = require("./routes/uploadImage");
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.DB_URL);
@@ -34,7 +34,7 @@ app.use(cors({ origin: "http://localhost:3000" }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/product", productRouter);
-
+app.use("/api/image", imageRouter);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

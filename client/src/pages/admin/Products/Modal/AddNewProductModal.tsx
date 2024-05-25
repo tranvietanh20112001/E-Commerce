@@ -3,7 +3,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+// import { useState } from "react";
 import { Textarea } from "@mui/joy";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../../stores/index.store";
@@ -34,13 +34,13 @@ export default function ProductModal({
 }) {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [image, setImageProduct] = useState<File>();
+  // const [image, setImageProduct] = useState<File>();
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return;
-    const image = e.target.files[0];
-    setImageProduct(image);
-  };
+  // const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   if (!e.target.files) return;
+  //   const image = e.target.files[0];
+  //   setImageProduct(image);
+  // };
 
   const initialValues: Partial<ICreateProductPayload> = {
     name: "",
@@ -49,7 +49,7 @@ export default function ProductModal({
   };
 
   const handleSubmit = (values: Partial<ICreateProductPayload>) => {
-    dispatch(addProduct({ ...values, image } as ICreateProductPayload))
+    dispatch(addProduct({ ...values } as ICreateProductPayload))
       .unwrap()
       .then(() => handleClose());
   };
@@ -120,16 +120,33 @@ export default function ProductModal({
                 placeholder="Decription"
                 variant="outlined"
               />
+              {/* Category ------------------ */}
+              <Field
+                as={Textarea}
+                id="category"
+                name="category"
+                placeholder="Category"
+                variant="outlined"
+              />
+              {/* Stock Quantity ------------------ */}
+              <Field
+                as={TextField}
+                label="Stock Quantity"
+                variant="outlined"
+                name="stock_quantity"
+                id="stock_quantity"
+                size="small"
+                type="number"
+              />
               {/* Banner Image ------------------ */}
-              <Button variant="outlined" component="label">
-                <input
-                  type="file"
-                  accept="image/*"
-                  hidden
-                  onChange={handleFileChange}
-                />
-                {image ? image.name : "Select Banner Image"}
-              </Button>
+              <Field
+                as={TextField}
+                label="Image URL"
+                variant="outlined"
+                name="imageURL"
+                id="imageURL"
+                size="small"
+              />
             </Box>
             <Button
               variant="contained"
