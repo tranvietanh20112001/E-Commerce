@@ -63,6 +63,15 @@ export default function Dropdown() {
             Login
           </MenuItem>
         )}
+        {user?.is_admin && (
+          <MenuItem
+            onClick={() => {
+              navigate("/admin/dashboard");
+            }}
+          >
+            Admin
+          </MenuItem>
+        )}
 
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>

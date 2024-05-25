@@ -32,6 +32,7 @@ export interface IUserState {
   user: IUser | null;
   loading: boolean;
   error: string | null;
+  users: IUser[];
 }
 
 export interface IFindUsersPayload {
@@ -53,4 +54,16 @@ export interface IRegisterPayload {
   phone_number: string;
   is_admin: false;
   gender: EGender;
+}
+
+export interface IGetAllUsersPayload {
+  first_name?: string;
+  last_name?: string;
+  username?: string;
+  gender?: EGender;
+  is_active?: boolean;
+  sort?: string;
+  order?: string;
+  skip?: number;
+  limit?: number;
 }

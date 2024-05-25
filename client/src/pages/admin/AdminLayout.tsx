@@ -1,21 +1,66 @@
 import React, { useState } from "react";
 import {
   ProductOutlined,
-  FileOutlined,
   PieChartOutlined,
   TeamOutlined,
   UserOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
-import { Link, Outlet } from "react-router-dom";
-
+import { Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import type { MenuProps } from "antd";
 const { Header, Content, Footer, Sider } = Layout;
+type MenuItem = Required<MenuProps>["items"][number];
+
+function capitalizeFirstLetter(string: string): string {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const items: MenuItem[] = [
+    {
+      key: "0",
+      label: "Dashboard",
+      icon: <PieChartOutlined />,
+      onClick: () => navigate("/admin/dashboard"),
+    },
+    {
+      key: "1",
+      label: "Products",
+      icon: <ProductOutlined />,
+      onClick: () => navigate("/admin/products"),
+    },
+    {
+      key: "2",
+      label: "Users",
+      icon: <UserOutlined />,
+      onClick: () => navigate("/admin/users"),
+    },
+    {
+      key: "3",
+      label: "Orders",
+      icon: <TeamOutlined />,
+      onClick: () => navigate("/admin/orders"),
+    },
+    {
+      key: "4",
+      label: "Home",
+      icon: <HomeOutlined />,
+      onClick: () => navigate("/"),
+    },
+  ];
+
+  const parts = location.pathname.split("/");
+  const finalBread = parts[2] ? capitalizeFirstLetter(parts[2]) : "";
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -25,38 +70,52 @@ const App: React.FC = () => {
         onCollapse={(value) => setCollapsed(value)}
       >
         <div className="demo-logo-vertical" />
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline">
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            <Link to="/admin">Dashboard</Link>
-          </Menu.Item>
-
-          <Menu.Item key="2" icon={<ProductOutlined />}>
-            <Link to="/admin/products">Products</Link>
-          </Menu.Item>
-
-          <Menu.Item key="3" icon={<UserOutlined />}>
-            User
-          </Menu.Item>
-          <Menu.Item key="4" icon={<TeamOutlined />}>
-            Team
-          </Menu.Item>
-          <Menu.Item key="5" icon={<FileOutlined />}>
-            Files
-          </Menu.Item>
-        </Menu>
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={["0"]}
+          mode="inline"
+          items={items}
+        ></Menu>
       </Sider>
-      <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }}>
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-
+      <Layout
+        style={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+          gap: "12px",
+        }}
+      >
+        <Header
+          style={{
+            padding: "0 2.5%",
+            background: colorBgContainer,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Breadcrumb
+            items={[
+              {
+                title: <a>Home</a>,
+                onClick: () => navigate("/"),
+              },
+              {
+                title: <a>Admin</a>,
+                onClick: () => navigate("/admin/dashboard"),
+              },
+              {
+                title: <a>{finalBread}</a>,
+              },
+            ]}
+          />
+        </Header>
+        <Content style={{ width: "95%" }}>
           <Outlet />
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©{new Date().getFullYear()} Created by Ant UED
+          E-Commerce Admin Created by Viet Anh Tran
         </Footer>
       </Layout>
     </Layout>

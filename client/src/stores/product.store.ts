@@ -62,7 +62,7 @@ const productsSlice = createSlice({
       })
       .addCase(deleteProductById.fulfilled, (state, action) => {
         state.items = state.items.filter(
-          (item: { _id: any }) => item._id !== action.payload._id
+          (item: { _id: string }) => item._id !== action.payload._id
         );
       })
       .addCase(addProduct.fulfilled, (state, action) => {

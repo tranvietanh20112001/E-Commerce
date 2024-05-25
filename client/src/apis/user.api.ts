@@ -7,6 +7,7 @@ export const login = async (payload: ILoginPayload) => {
   return axios.post(`${API_URL}/auth/login`, payload);
 };
 
+// Load User
 const loadUser = async (token: string) => {
   return axios.get(`${API_URL}/auth/user`, {
     headers: { Authorization: token },
@@ -19,4 +20,9 @@ const register = async (payload: IRegisterPayload) => {
   });
 };
 
-export default { login, register, loadUser };
+// Get all users
+const getUsers = async () => {
+  return await axios.get(`${API_URL}/auth/users`);
+};
+
+export default { login, register, loadUser, getUsers };

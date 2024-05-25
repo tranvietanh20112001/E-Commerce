@@ -11,6 +11,7 @@ const initialState: IUserState = {
   user: null,
   loading: false,
   error: null,
+  users: [],
 };
 
 // Login --------------------------------------------------------
@@ -40,6 +41,12 @@ export const getCurrentUser = createAsyncThunk(
     return response.data;
   }
 );
+
+// Get all users -----------------------------------------------
+export const getUsers = createAsyncThunk(`${name}/getUsers`, async () => {
+  const response = await userService.getUsers();
+  return response.data;
+});
 
 const userSlice = createSlice({
   name,
@@ -84,6 +91,17 @@ const userSlice = createSlice({
         state.error = null;
       })
       .addCase(register.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || null;
+      })
+      .addCase(getUsers.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, action) => {
+        state.loading = false;
+        state.users = action.payload;
+      })
+      .addCase(getUsers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || null;
       });
