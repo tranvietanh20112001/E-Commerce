@@ -12,9 +12,8 @@ export interface IProduct {
   rating: number;
 }
 export interface ProductsState {
-  items: IProduct[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
+  products: IProduct[];
+  product: IProduct | null;
 }
 
 export interface ICreateProductPayload {
@@ -25,5 +24,9 @@ export interface ICreateProductPayload {
 }
 
 export interface IDeleteProductPayload {
+  _id: string;
+}
+
+export interface IFindProductByIdPayload {
   _id: string;
 }

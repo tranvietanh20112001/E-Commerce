@@ -38,7 +38,6 @@ export default function productRow({ product }: IProductRowProps) {
         </TableCell>
         <TableCell align="left">{product.name}</TableCell>
         <TableCell align="left">{product.price}</TableCell>
-        <TableCell align="left">{product.description}</TableCell>
         <TableCell align="left">
           <Button
             variant="outlined"

@@ -18,7 +18,7 @@ import AddNewProductModal from "./Modal/AddNewProductModal";
 import React from "react";
 const ProductList = () => {
   const dispatch: AppDispatch = useDispatch();
-  const products = useSelector((state: RootState) => state.products.items);
+  const products = useSelector((state: RootState) => state.products.products);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -48,7 +48,6 @@ const ProductList = () => {
               <TableCell align="left">ID</TableCell>
               <TableCell align="left">Product</TableCell>
               <TableCell align="left">Price</TableCell>
-              <TableCell align="left">Decription</TableCell>
               <TableCell align="left">Action</TableCell>
             </TableRow>
           </TableHead>

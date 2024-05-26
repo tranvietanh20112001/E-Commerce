@@ -3,6 +3,7 @@ import {
   fetchProducts,
   deleteProduct,
   createProduct,
+  findProductById,
 } from "../apis/product.api";
 import {
   IDeleteProductPayload,
@@ -11,9 +12,8 @@ import {
 } from "@interfaces/product.interface";
 
 const initialState: ProductsState = {
-  items: [],
-  status: "idle",
-  error: null,
+  products: [],
+  product: null,
 };
 
 // Get All Products ------------------------------------------
@@ -43,30 +43,34 @@ export const deleteProductById = createAsyncThunk(
   }
 );
 
+// Get Product By Id ------------------------------------------
+export const getProductById = createAsyncThunk(
+  "products/fetchProductById",
+  async (id: string) => {
+    const response = await findProductById(id);
+    return response.data;
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getProducts.pending, (state) => {
-        state.status = "loading";
-      })
       .addCase(getProducts.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.items = action.payload;
-      })
-      .addCase(getProducts.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || "Failed to fetch products";
+        state.products = action.payload;
       })
       .addCase(deleteProductById.fulfilled, (state, action) => {
-        state.items = state.items.filter(
-          (item: { _id: string }) => item._id !== action.payload._id
+        state.products = state.products.filter(
+          (product: { _id: string }) => product._id !== action.payload._id
         );
       })
       .addCase(addProduct.fulfilled, (state, action) => {
-        state.items.push(action.payload);
+        state.products.push(action.payload);
+      })
+      .addCase(getProductById.fulfilled, (state, action) => {
+        state.product = action.payload;
       });
   },
 });

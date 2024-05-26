@@ -51,7 +51,8 @@ export default function ProductModal({
   const handleSubmit = (values: Partial<ICreateProductPayload>) => {
     dispatch(addProduct({ ...values } as ICreateProductPayload))
       .unwrap()
-      .then(() => handleClose());
+      .then(() => handleClose())
+      .then(() => window.location.reload());
   };
 
   return (

@@ -11,7 +11,7 @@ const { Title } = Typography;
 
 const Homepage = () => {
   const dispatch: AppDispatch = useDispatch();
-  const products = useSelector((state: RootState) => state.products.items);
+  const products = useSelector((state: RootState) => state.products.products);
 
   useEffect(() => {
     dispatch(getProducts());
@@ -36,7 +36,7 @@ const Homepage = () => {
           Our Products
         </Title>
       </Box>
-      <Box width={"100%"} display={"flex"} gap={2}>
+      <Box width={"100%"} display={"flex"} gap={2} flexWrap={"wrap"}>
         {products.map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
