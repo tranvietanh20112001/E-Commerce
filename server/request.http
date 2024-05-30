@@ -1,53 +1,10 @@
-POST http://localhost:8000/api/auth/register
-Content-Type: application/json
 
-{
-  "username": "admin",
-  "password": "admin",
-}
+### Get User by Id
+GET http://localhost:8000/api/auth/user/66506a24ff836f0e47011a55
 
-###
-
-POST http://localhost:8000/api/auth/login
-Content-Type: application/json
-
-{
-  "username": "vuconglong",
-  "password": "1234"
-}
-
-###
-
-POST http://localhost:8000/api/product/
-Content-Type: application/json
-
-{
-  "name": "do choi 12",
-  "description": "do choi 12 ne",
-  "price": 150,
-  "imageURL": "..."
-}
-
-###
-GET http://localhost:8000/api/product/66515a60a71ffd2d1b42bf40
-
-###
-GET http://localhost:8000/api/auth/users
-
-###
-POST http://localhost:8000/api/image/upload
-Content-Type: multipart/form-data
-
-###
-GET http://localhost:8000/api/product/66515a60a71ffd2d1b42bf40
-
-###
+### Update User by Id
 PUT http://localhost:8000/api/auth/user/66506a24ff836f0e47011a55
-Content-Type: application/json
 
 {
-  "username" : "vuconglong2",
-  "first_name" : "vu",
-  "last_name": "long",
-  "phone_number" : "123",
+  
 }

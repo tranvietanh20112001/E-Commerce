@@ -2,7 +2,6 @@ import {
   ILoginPayload,
   IRegisterPayload,
   IUpdateUserByIdPayload,
-  IUser,
 } from "@interfaces/user.interface";
 import { axiosInstance } from "@lib/axios.lib";
 import { API_URL } from "@config/config";
@@ -30,16 +29,21 @@ const getUsers = async () => {
   return await axios.get(`${API_URL}/auth/users`);
 };
 
-// update user by id
-const updateUser = async (
-  _id: string,
-  payload: IUpdateUserByIdPayload
-): Promise<Partial<IUser>> => {
-  const response = await axios.put<IUpdateUserByIdPayload>(
-    `${API_URL}/auth/users/${_id}`,
-    payload
-  );
-  return response.data;
+// fint user by id
+const findUserById = async (payload: string) => {
+  return axios.get(`${API_URL}/auth/user/${payload}`);
 };
 
-export default { login, register, loadUser, getUsers, updateUser };
+// update user profile by id
+const updateUserById = async (_id: string, payload: IUpdateUserByIdPayload) => {
+  return axios.put(`${API_URL}/auth/user/${_id}`, { ...payload });
+};
+
+export default {
+  login,
+  register,
+  loadUser,
+  getUsers,
+  findUserById,
+  updateUserById,
+};

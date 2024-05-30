@@ -1,16 +1,15 @@
 import {
   ILoginPayload,
   IRegisterPayload,
-  IUpdateUserByIdPayload,
   IUserState,
 } from "../interfaces/user.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import userService from "../apis/user.api";
+import { IUpdateProductByIdPayload } from "@interfaces/product.interface";
 
 export const name = "userState";
 const initialState: IUserState = {
   user: null,
-  loading: false,
   error: null,
   users: [],
 };
@@ -49,20 +48,29 @@ export const getUsers = createAsyncThunk(`${name}/getUsers`, async () => {
   return response.data;
 });
 
-// Update user -------------------------------------------------
+// Find user by id ---------------------------------------------
+export const findUserById = createAsyncThunk(
+  `${name}/findUserById`,
+  async (userId: string) => {
+    const response = await userService.findUserById(userId);
+    return response.data;
+  }
+);
+
+// Update user by id -------------------------------------------
 export const updateUserById = createAsyncThunk(
-  `${name}/updateUser`,
+  `${name}/updateUserById`,
   async ({
     _id,
     payload,
   }: {
     _id: string;
-    payload: IUpdateUserByIdPayload;
+    payload: IUpdateProductByIdPayload;
   }) => {
-    return await userService.updateUser(_id, payload);
+    const response = await userService.updateUserById(_id, payload);
+    return response.data;
   }
 );
-
 const userSlice = createSlice({
   name,
   initialState,
@@ -76,49 +84,28 @@ const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-      })
+
       .addCase(login.fulfilled, (state) => {
-        state.loading = false;
         state.error = null;
       })
-      .addCase(login.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || null;
-      })
-      .addCase(getCurrentUser.pending, (state) => {
-        state.loading = true;
-      })
+
       .addCase(getCurrentUser.fulfilled, (state, action) => {
-        state.loading = false;
         state.user = action.payload;
       })
-      .addCase(getCurrentUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || null;
-      })
-      .addCase(register.pending, (state) => {
-        state.loading = true;
-      })
+
       .addCase(register.fulfilled, (state) => {
-        state.loading = false;
         state.error = null;
       })
-      .addCase(register.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || null;
-      })
-      .addCase(getUsers.pending, (state) => {
-        state.loading = true;
-      })
+
       .addCase(getUsers.fulfilled, (state, action) => {
-        state.loading = false;
         state.users = action.payload;
       })
-      .addCase(getUsers.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || null;
+      .addCase(findUserById.fulfilled, (state, action) => {
+        state.user = action.payload;
+      })
+
+      .addCase(updateUserById.fulfilled, (state, action) => {
+        state.user = action.payload;
       });
   },
 });

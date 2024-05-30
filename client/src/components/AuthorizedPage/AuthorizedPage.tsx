@@ -20,6 +20,6 @@ export default function AuthorizedPage({ children }: IAuthorizedPageProps) {
     return <>{children}</>;
   } else {
     notifyError("You are not authorized to access this page!");
-    return <Navigate to="/" />;
+    return <Navigate to="/error" />;
   }
 }

@@ -4,6 +4,7 @@ import Contact from "@pages/home/contact/Contact";
 import { About } from "@pages/home/about/About";
 import ProductDetail from "@pages/home/productDetail/productDetail";
 import Account from "@pages/home/account/Account";
+import ErrorHomePage from "@pages/home/error/ErrorHomePage";
 export const HomeRoutes: IRoute[] = [
   {
     path: "/",
@@ -24,5 +25,9 @@ export const HomeRoutes: IRoute[] = [
   {
     path: "/profile/:id",
     component: <Account />,
+  },
+  {
+    path: "/error",
+    component: <ErrorHomePage />,
   },
 ];

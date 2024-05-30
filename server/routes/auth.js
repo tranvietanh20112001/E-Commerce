@@ -65,14 +65,23 @@ router.get("/users", async (req, res) => {
 
 // Update user details
 router.put("/user/:id", async (req, res) => {
-  const { username, first_name, last_name, phone_number } = req.body;
-  const user = await User.findById(req.user.userId).select("-password_hash");
-  if (username) user.username = username;
-  if (first_name) user.first_name = first_name;
-  if (last_name) user.last_name = last_name;
-  if (phone_number) user.phone_number = phone_number;
-  await user.save();
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
   res.json(user);
 });
 
+// find user by id
+router.get("/user/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select("-password_hash");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({ error: "An error occurred" });
+  }
+});
 module.exports = router;
