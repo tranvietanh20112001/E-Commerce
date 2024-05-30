@@ -30,3 +30,12 @@ export interface IDeleteProductPayload {
 export interface IFindProductByIdPayload {
   _id: string;
 }
+
+export interface IUpdateProductByIdPayload {
+  _id: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  stock_quantity?: number;
+  category?: string;
+}

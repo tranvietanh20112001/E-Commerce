@@ -1,6 +1,10 @@
 import axios from "axios";
 import { API_URL } from "@config/config";
-import { ICreateProductPayload, IProduct } from "@interfaces/product.interface";
+import {
+  ICreateProductPayload,
+  IProduct,
+  IUpdateProductByIdPayload,
+} from "@interfaces/product.interface";
 import { axiosInstance } from "@lib/axios.lib";
 import { objectToFormData } from "@utils/data.util";
 export const fetchProducts = async () => {
@@ -31,4 +35,14 @@ export const deleteProduct = async (productId: string) => {
 
 export const findProductById = async (payload: string) => {
   return axios.get(`${API_URL}/product/${payload}`);
+};
+
+export const updateProduct = async (
+  productId: string,
+  productData: IUpdateProductByIdPayload
+) => {
+  const response = await axios.put(`${API_URL}/product/${productId}`, {
+    ...productData,
+  });
+  return response.data;
 };

@@ -10,12 +10,14 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "@stores/index.store";
 import React from "react";
 import { deleteProductById } from "../../../stores/product.store";
+import { useNavigate } from "react-router-dom";
 
 export interface IProductRowProps {
   product: IProduct;
 }
 
 export default function productRow({ product }: IProductRowProps) {
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
   const [openDeleteProductModal, setOpenDeleteProductModal] =
@@ -45,6 +47,7 @@ export default function productRow({ product }: IProductRowProps) {
             color="info"
             startIcon={<EyeIcon />}
             sx={{ mr: 4 }}
+            onClick={() => navigate(`/admin/products/${product._id}`)}
           >
             View
           </Button>

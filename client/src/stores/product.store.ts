@@ -4,11 +4,13 @@ import {
   deleteProduct,
   createProduct,
   findProductById,
+  updateProduct,
 } from "../apis/product.api";
 import {
   IDeleteProductPayload,
   ICreateProductPayload,
   ProductsState,
+  IUpdateProductByIdPayload,
 } from "@interfaces/product.interface";
 
 const initialState: ProductsState = {
@@ -52,6 +54,21 @@ export const getProductById = createAsyncThunk(
   }
 );
 
+// Update Product By Id ------------------------------------------
+export const updateProductById = createAsyncThunk(
+  "products/updateProductById",
+  async ({
+    productId,
+    productData,
+  }: {
+    productId: string;
+    productData: IUpdateProductByIdPayload;
+  }) => {
+    const response = await updateProduct(productId, productData);
+    return response;
+  }
+);
+
 const productsSlice = createSlice({
   name: "products",
   initialState,
@@ -70,6 +87,9 @@ const productsSlice = createSlice({
         state.products.push(action.payload);
       })
       .addCase(getProductById.fulfilled, (state, action) => {
+        state.product = action.payload;
+      })
+      .addCase(updateProductById.fulfilled, (state, action) => {
         state.product = action.payload;
       });
   },
