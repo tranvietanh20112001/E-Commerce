@@ -10,9 +10,8 @@ export default function NotificationProvider({
   return (
     <>
       <ToastContainer
-        stacked
         position="top-right"
-        autoClose={4000}
+        autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -22,6 +21,8 @@ export default function NotificationProvider({
         pauseOnHover
         theme="light"
       />
+      {/* Same as */}
+      <ToastContainer />
       {children}
     </>
   );

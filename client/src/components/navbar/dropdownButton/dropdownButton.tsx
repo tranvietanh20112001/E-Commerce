@@ -6,6 +6,7 @@ import AccountIcon from "@mui/icons-material/AccountCircleOutlined";
 import { useSelector } from "react-redux";
 import { RootState } from "@stores/index.store";
 import { useNavigate } from "react-router-dom";
+import { notifySuccess } from "@utils/notification.util";
 export default function Dropdown() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -21,6 +22,7 @@ export default function Dropdown() {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
+    notifySuccess("Logout successfully");
   };
 
   const navigate = useNavigate();

@@ -16,9 +16,11 @@ const Homepage = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
+
   return (
     <>
       <Carousel />
+
       <Box
         width={"100%"}
         display={"flex"}

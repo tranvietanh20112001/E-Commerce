@@ -5,6 +5,14 @@ GET http://localhost:8000/api/auth/user/66506a24ff836f0e47011a55
 ### Update User by Id
 PUT http://localhost:8000/api/auth/user/66506a24ff836f0e47011a55
 
+### Regsiter
+POST http://localhost:8000/api/auth/register
+Content-Type: application/json
+
 {
-  
+    "username": "tranvietanh"
+
 }
+
+###
+GET http://localhost:8000/api/auth/users

@@ -18,7 +18,7 @@ const AuthLayout = () => {
         <Box width={"90%"}>
           <Navbar />
           <Divider />
-          {user && <Navigate to={searchParams.get("redirect") || "/home"} />}
+          {user && <Navigate to={searchParams.get("redirect") || "/"} />}
           <Box width={"100%"} display={"flex"}>
             <Box width={"50%"}>
               <Image

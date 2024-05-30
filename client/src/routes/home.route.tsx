@@ -5,6 +5,7 @@ import { About } from "@pages/home/about/About";
 import ProductDetail from "@pages/home/productDetail/productDetail";
 import Account from "@pages/home/account/Account";
 import ErrorHomePage from "@pages/home/error/ErrorHomePage";
+import Cart from "@pages/home/cart/Cart";
 export const HomeRoutes: IRoute[] = [
   {
     path: "/",
@@ -29,5 +30,10 @@ export const HomeRoutes: IRoute[] = [
   {
     path: "/error",
     component: <ErrorHomePage />,
+  },
+
+  {
+    path: "/cart",
+    component: <Cart />,
   },
 ];

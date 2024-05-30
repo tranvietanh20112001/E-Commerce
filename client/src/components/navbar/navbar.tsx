@@ -73,7 +73,11 @@ export const Navbar = () => {
           }}
         />
 
-        <CartIcon fontSize="large" />
+        <CartIcon
+          fontSize="large"
+          onClick={() => navigate("/cart")}
+          style={{ cursor: "pointer" }}
+        />
         <Dropdown />
       </Box>
     </Box>

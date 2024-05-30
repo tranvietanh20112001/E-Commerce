@@ -24,6 +24,7 @@ export const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const onSubmit = (values: IRegisterPayload) => {
     console.log(values);
+
     dispatch(register(values)).then(() => {
       navigate("/");
     });

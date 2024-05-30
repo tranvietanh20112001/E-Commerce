@@ -8,6 +8,7 @@ import { ILoginPayload } from "@interfaces/user.interface";
 import { Field, Form, Formik } from "formik";
 import { login } from "../../../stores/user.store";
 import { useNavigate } from "react-router-dom";
+import { notifySuccess } from "@utils/notification.util";
 
 const { Title, Text } = Typography;
 
@@ -21,9 +22,14 @@ export const Login = () => {
   const dispatch = useDispatch<AppDispatch>();
   const onSubmit = (values: ILoginPayload) => {
     console.log(values);
-    dispatch(login(values)).then(() => {
-      navigate("/");
-    });
+    try {
+      dispatch(login(values)).then(() => {
+        navigate("/");
+        notifySuccess("Login successfully");
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Box

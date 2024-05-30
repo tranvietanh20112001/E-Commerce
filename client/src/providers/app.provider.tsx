@@ -3,6 +3,7 @@ import { APP_TITLE } from "../config/config";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "../stores/index.store";
+import "react-toastify/dist/ReactToastify.css"; // Css for toast notification
 
 interface IAppProviderProps {
   children: ReactNode;

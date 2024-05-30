@@ -29,6 +29,22 @@ router.post("/register", async (req, res) => {
     is_admin,
   });
 
+  if (
+    !username ||
+    !password ||
+    !first_name ||
+    !last_name ||
+    !phone_number ||
+    !gender
+  ) {
+    return res.status(400).send("All fields are required");
+  }
+
+  const userExists = await User.findOne({ username });
+  if (userExists) {
+    return res.status(400).json({ message: "Username already exists" });
+  }
+
   try {
     await user.save();
     res.status(200).send("User registered");
