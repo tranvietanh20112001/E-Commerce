@@ -3,6 +3,7 @@ import Homepage from "@pages/home/homepage/homepage";
 import Contact from "@pages/home/contact/Contact";
 import { About } from "@pages/home/about/About";
 import ProductDetail from "@pages/home/productDetail/productDetail";
+import Account from "@pages/home/account/Account";
 export const HomeRoutes: IRoute[] = [
   {
     path: "/",
@@ -19,5 +20,9 @@ export const HomeRoutes: IRoute[] = [
   {
     path: "/product/:id",
     component: <ProductDetail />,
+  },
+  {
+    path: "/profile/:id",
+    component: <Account />,
   },
 ];

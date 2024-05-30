@@ -67,3 +67,16 @@ export interface IGetAllUsersPayload {
   skip?: number;
   limit?: number;
 }
+
+export interface IFindUserByIdPayload {
+  _id?: string;
+}
+
+export interface IUpdateUserByIdPayload {
+  _id: string;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
+  phone_number?: string;
+  gender?: EGender;
+}

@@ -29,7 +29,8 @@
     "styled-components": "^6.1.11",
     "uuid": "^9.0.1",
     "vite-plugin-checker": "^0.6.4",
-    "vite-tsconfig-paths": "^4.3.2"
+    "vite-tsconfig-paths": "^4.3.2",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",

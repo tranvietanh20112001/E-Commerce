@@ -27,7 +27,7 @@ export default function ProductCard({ product }: IProductCardProps) {
           style={{ backgroundColor: "#F5F5F5" }}
         />
 
-        <Title level={4} style={{ margin: 0 }}>
+        <Title level={5} style={{ margin: 0 }}>
           {product.name}
         </Title>
         <Text style={{ color: "red", fontWeight: "bold" }}>

@@ -64,16 +64,13 @@ router.get("/users", async (req, res) => {
 });
 
 // Update user details
-router.put("/user", authenticateToken, async (req, res) => {
-  const { username, password, first_name, last_name, phone_number, gender } =
-    req.body;
-  const user = await User.findById(req.user.userId);
+router.put("/user/:id", async (req, res) => {
+  const { username, first_name, last_name, phone_number } = req.body;
+  const user = await User.findById(req.user.userId).select("-password_hash");
   if (username) user.username = username;
-  if (password) user.password = await bcryptjs.hash(password, 10);
   if (first_name) user.first_name = first_name;
   if (last_name) user.last_name = last_name;
   if (phone_number) user.phone_number = phone_number;
-  if (gender) user.gender = gender;
   await user.save();
   res.json(user);
 });

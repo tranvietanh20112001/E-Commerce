@@ -1,6 +1,7 @@
 import {
   ILoginPayload,
   IRegisterPayload,
+  IUpdateUserByIdPayload,
   IUserState,
 } from "../interfaces/user.interface";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -47,6 +48,20 @@ export const getUsers = createAsyncThunk(`${name}/getUsers`, async () => {
   const response = await userService.getUsers();
   return response.data;
 });
+
+// Update user -------------------------------------------------
+export const updateUserById = createAsyncThunk(
+  `${name}/updateUser`,
+  async ({
+    _id,
+    payload,
+  }: {
+    _id: string;
+    payload: IUpdateUserByIdPayload;
+  }) => {
+    return await userService.updateUser(_id, payload);
+  }
+);
 
 const userSlice = createSlice({
   name,

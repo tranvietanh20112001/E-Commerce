@@ -48,7 +48,7 @@ export default function Dropdown() {
         {user && (
           <MenuItem
             onClick={() => {
-              navigate("/profile");
+              navigate(`/profile/${user._id}`);
             }}
           >
             Profile
